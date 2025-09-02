@@ -1,0 +1,553 @@
+/* Responsive Design System for Dark Finance Dashboard */
+
+/* Design Tokens */
+:root {
+  --container-max: 1280px;
+  --gap-xs: 8px;
+  --gap-sm: 12px;
+  --gap-md: 16px;
+  --gap-lg: 24px;
+  --gap-xl: 32px;
+  --pad-1: 12px;
+  --pad-2: 16px;
+  --pad-3: 20px;
+  --pad-4: 24px;
+  --radius-sm: 12px;
+  --radius-md: 18px;
+  --radius-lg: 24px;
+}
+
+/* Typography Scaling */
+html {
+  font-size: clamp(15px, 1.6vw, 16px);
+}
+
+h1 {
+  font-size: clamp(20px, 3.2vw, 28px) !important;
+}
+
+h2 {
+  font-size: clamp(18px, 2.4vw, 22px) !important;
+}
+
+h3 {
+  font-size: clamp(16px, 2vw, 18px) !important;
+}
+
+/* Container System */
+.container {
+  max-width: var(--container-max);
+  margin: 0 auto;
+  padding-inline: var(--pad-3);
+}
+
+/* Grid Utilities */
+.grid-2 {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+  gap: var(--gap-md);
+}
+
+.grid-3 {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  gap: var(--gap-md);
+}
+
+/* Mobile Menu Overlay */
+.sidebar-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.6);
+  backdrop-filter: blur(4px);
+  z-index: 998;
+  opacity: 0;
+  visibility: hidden;
+  transition: all 220ms ease;
+}
+
+.sidebar-overlay.is-open {
+  opacity: 1;
+  visibility: visible;
+}
+
+/* Hamburger Menu Button */
+.hamburger-btn {
+  display: none;
+  width: 44px;
+  height: 44px;
+  background: none;
+  border: none;
+  cursor: pointer;
+  padding: 8px;
+  border-radius: var(--radius-sm);
+  color: var(--text-100);
+  transition: all 0.2s ease;
+}
+
+.hamburger-btn:hover {
+  background: var(--glass);
+}
+
+.hamburger-btn span {
+  display: block;
+  width: 20px;
+  height: 2px;
+  background: currentColor;
+  margin: 4px 0;
+  transition: all 220ms ease;
+  border-radius: 1px;
+}
+
+.hamburger-btn.is-open span:nth-child(1) {
+  transform: rotate(45deg) translate(5px, 5px);
+}
+
+.hamburger-btn.is-open span:nth-child(2) {
+  opacity: 0;
+}
+
+.hamburger-btn.is-open span:nth-child(3) {
+  transform: rotate(-45deg) translate(7px, -6px);
+}
+
+/* Chart Responsive Utilities */
+.chart-responsive {
+  width: 100%;
+  height: auto;
+}
+
+.chart-bar {
+  aspect-ratio: 16/7;
+}
+
+.chart-donut {
+  aspect-ratio: 1/1;
+  min-height: 220px;
+}
+
+.chart-line {
+  aspect-ratio: 16/6;
+}
+
+/* Chip Wrapping */
+.chips-wrap {
+  flex-wrap: wrap;
+  row-gap: var(--gap-sm);
+}
+
+/* No Scroll Lock */
+body.no-scroll {
+  overflow: hidden;
+}
+
+/* Large Tablet: 1024px - 1279px */
+@media (max-width: 1279px) {
+  :root {
+    --right-column-width: clamp(280px, 32vw, 320px);
+  }
+  
+  .dashboard-grid {
+    gap: var(--gap-lg);
+  }
+  
+  .sidebar {
+    width: 72px;
+    padding: var(--space-lg) var(--space-sm);
+  }
+  
+  .app-shell {
+    grid-template-columns: 72px 1fr;
+    gap: var(--gap-lg);
+  }
+  
+  .card {
+    padding: var(--pad-3);
+  }
+  
+  .chart-bar {
+    aspect-ratio: 16/8;
+  }
+  
+  .chart-donut {
+    min-height: 200px;
+  }
+}
+
+/* Tablet: 768px - 1023px */
+@media (max-width: 1023px) {
+  .app-shell {
+    grid-template-columns: 1fr;
+    grid-template-rows: auto 1fr;
+    grid-template-areas: 
+      "topbar"
+      "main";
+    gap: var(--gap-md);
+    padding: var(--pad-2);
+  }
+  
+  .sidebar {
+    position: fixed;
+    top: 0;
+    left: -280px;
+    width: 280px;
+    height: 100vh;
+    z-index: 999;
+    transition: transform 220ms ease;
+    padding: var(--pad-4) var(--pad-3);
+    background: var(--panel-650);
+    border-right: 1px solid var(--line);
+  }
+  
+  .sidebar.is-open {
+    transform: translateX(280px);
+  }
+  
+  .hamburger-btn {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+  
+  .topbar {
+    padding: 0 var(--pad-3);
+    height: auto;
+    min-height: 64px;
+  }
+  
+  .topbar-left {
+    display: flex;
+    align-items: center;
+    gap: var(--gap-md);
+  }
+  
+  .dashboard-grid {
+    grid-template-columns: 1fr;
+    gap: var(--gap-md);
+  }
+  
+  .small-cards-row {
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: var(--gap-md);
+  }
+  
+  .bottom-tiles {
+    grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+    gap: var(--gap-md);
+  }
+  
+  .card {
+    padding: var(--pad-3);
+  }
+  
+  .chart-bar {
+    aspect-ratio: 16/9;
+  }
+  
+  .chart-donut {
+    min-height: 180px;
+  }
+  
+  .filter-chips {
+    overflow-x: auto;
+    scrollbar-width: none;
+    -ms-overflow-style: none;
+  }
+  
+  .filter-chips::-webkit-scrollbar {
+    display: none;
+  }
+  
+  .chip {
+    flex-shrink: 0;
+    height: 36px;
+  }
+}
+
+/* Mobile: 480px - 767px */
+@media (max-width: 767px) {
+  .app-shell {
+    margin: var(--gap-sm);
+    padding: var(--pad-2);
+    gap: var(--gap-sm);
+  }
+  
+  .topbar {
+    padding: 0 var(--pad-2);
+    min-height: 56px;
+    flex-wrap: wrap;
+    gap: var(--gap-sm);
+  }
+  
+  .topbar-center {
+    order: 3;
+    flex: 1 1 100%;
+  }
+  
+  .search-input {
+    height: 40px;
+    font-size: 14px;
+  }
+  
+  .user-greeting {
+    display: none;
+  }
+  
+  .user-avatar {
+    width: 32px;
+    height: 32px;
+  }
+  
+  .left-column,
+  .right-column {
+    gap: var(--gap-md);
+  }
+  
+  .small-cards-row {
+    grid-template-columns: 1fr;
+    gap: var(--gap-sm);
+  }
+  
+  .bottom-tiles {
+    grid-template-columns: 1fr;
+    gap: var(--gap-sm);
+  }
+  
+  .card {
+    padding: var(--pad-2);
+    border-radius: var(--radius-md);
+  }
+  
+  .card-header {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: var(--gap-sm);
+    margin-bottom: var(--gap-md);
+  }
+  
+  .filter-chips {
+    width: 100%;
+  }
+  
+  .chip {
+    height: 32px;
+    padding: 0 var(--pad-2);
+    font-size: 13px;
+  }
+  
+  .chart-bar {
+    aspect-ratio: 16/10;
+  }
+  
+  .chart-donut {
+    min-height: 160px;
+  }
+  
+  .chart-y-axis {
+    font-size: 11px;
+  }
+  
+  .chart-x-labels span {
+    font-size: 12px;
+  }
+  
+  .credit-card {
+    height: 140px;
+  }
+  
+  .card-balance {
+    font-size: 22px;
+  }
+  
+  .card-number {
+    font-size: 14px;
+    letter-spacing: 1px;
+  }
+  
+  .transaction-item {
+    gap: var(--gap-sm);
+  }
+  
+  .transaction-icon {
+    width: 36px;
+    height: 36px;
+  }
+  
+  .mini-tile {
+    min-height: 100px;
+    padding: var(--pad-2);
+  }
+  
+  .mini-avatar {
+    width: 20px;
+    height: 20px;
+  }
+}
+
+/* Small Mobile: < 480px */
+@media (max-width: 479px) {
+  .app-shell {
+    margin: 0;
+    padding: var(--pad-1);
+    border-radius: 0;
+  }
+  
+  .topbar {
+    padding: 0 var(--pad-1);
+    min-height: 48px;
+  }
+  
+  .page-title {
+    font-size: 16px;
+  }
+  
+  .search-input {
+    height: 36px;
+    font-size: 13px;
+    padding-left: 32px;
+  }
+  
+  .search-icon {
+    width: 16px;
+    height: 16px;
+    left: var(--pad-1);
+  }
+  
+  .user-avatar {
+    width: 28px;
+    height: 28px;
+  }
+  
+  .card {
+    padding: var(--pad-1);
+    border-radius: var(--radius-sm);
+  }
+  
+  .card-title {
+    font-size: 14px;
+  }
+  
+  .chip {
+    height: 28px;
+    padding: 0 var(--pad-1);
+    font-size: 12px;
+    min-width: 44px;
+  }
+  
+  .chart-donut {
+    min-height: 140px;
+  }
+  
+  .chart-y-axis {
+    font-size: 10px;
+  }
+  
+  .chart-x-labels span {
+    font-size: 11px;
+  }
+  
+  .credit-card {
+    height: 120px;
+  }
+  
+  .card-content {
+    padding: var(--pad-2);
+  }
+  
+  .card-balance {
+    font-size: 18px;
+  }
+  
+  .card-number {
+    font-size: 12px;
+  }
+  
+  .add-card-btn {
+    width: 24px;
+    height: 24px;
+  }
+  
+  .transaction-icon {
+    width: 32px;
+    height: 32px;
+  }
+  
+  .transaction-name,
+  .transaction-amount {
+    font-size: 13px;
+  }
+  
+  .mini-tile {
+    min-height: 80px;
+    padding: var(--pad-1);
+  }
+  
+  .mini-title {
+    font-size: 13px;
+  }
+  
+  .mini-subtitle {
+    font-size: 11px;
+  }
+  
+  .mini-avatar {
+    width: 18px;
+    height: 18px;
+  }
+  
+  .metric-value {
+    font-size: 20px;
+  }
+  
+  .metric-chip {
+    font-size: 11px;
+    padding: 4px 8px;
+  }
+}
+
+/* Reduced Motion */
+@media (prefers-reduced-motion: reduce) {
+  .sidebar,
+  .sidebar-overlay,
+  .hamburger-btn span {
+    transition: opacity 220ms ease;
+  }
+  
+  .sidebar.is-open {
+    transform: none;
+  }
+  
+  .hamburger-btn.is-open span:nth-child(1),
+  .hamburger-btn.is-open span:nth-child(3) {
+    transform: none;
+  }
+}
+
+/* Focus Management */
+.sidebar[role="dialog"] {
+  outline: none;
+}
+
+.sidebar[role="dialog"]:focus-within {
+  box-shadow: inset 0 0 0 2px var(--accent);
+}
+
+/* Touch Targets */
+@media (pointer: coarse) {
+  .nav-item,
+  .chip,
+  .view-all-link,
+  .menu-button,
+  .add-card-btn {
+    min-width: 44px;
+    min-height: 44px;
+  }
+  
+  .transaction-item {
+    min-height: 44px;
+    cursor: pointer;
+  }
+}
