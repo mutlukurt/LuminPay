@@ -91,79 +91,33 @@
 @media (max-width: 1024px) {
   .dashboard-grid {
     grid-template-columns: 1fr;
-    gap: var(--space-2xl);
+    gap: var(--space-xl);
   }
   
-  .right-column {
-    order: 2;
+  .small-cards-row {
+    grid-template-columns: 1fr 1fr;
+    gap: var(--space-lg);
   }
   
   .bottom-tiles {
-    grid-template-columns: 1fr;
+    grid-template-columns: 1fr 1fr;
     gap: var(--space-md);
   }
 }
 
 @media (max-width: 768px) {
+  .dashboard-grid {
+    gap: var(--space-lg);
+  }
+  
+  .left-column,
+  .right-column {
+    gap: var(--space-lg);
+  }
+  
   .small-cards-row {
     grid-template-columns: 1fr;
     gap: var(--space-lg);
-  }
-  
-  .filter-chips {
-    flex-wrap: wrap;
-    gap: var(--space-sm);
-  }
-  
-  .chip {
-    height: 32px;
-    padding: 0 var(--space-md);
-    font-size: 12px;
-  }
-  
-  .revenue-flow {
-    min-height: 350px;
-  }
-  
-  .chart-y-axis {
-    height: 200px;
-    font-size: 10px;
-  }
-  
-  .chart-svg {
-    height: 200px;
-  }
-  
-  .my-card-section {
-    min-height: 240px;
-  }
-  
-  .card-balance {
-    font-size: 24px;
-  }
-  
-  .dashboard-grid {
-    gap: var(--space-xl);
-  }
-  
-  .left-column,
-  .right-column {
-    gap: var(--space-xl);
-  }
-}
-
-@media (max-width: 640px) {
-  .dashboard-grid {
-    gap: var(--space-lg);
-  }
-  
-  .left-column,
-  .right-column {
-    gap: var(--space-lg);
-  }
-  
-  .small-cards-row {
-    gap: var(--space-md);
   }
   
   .revenue-flow {
@@ -171,7 +125,7 @@
   }
   
   .my-card-section {
-    min-height: 200px;
+    min-height: 220px;
   }
   
   .transactions-section {
@@ -179,40 +133,23 @@
   }
   
   .bottom-tiles {
+    grid-template-columns: 1fr;
     gap: var(--space-sm);
   }
-  
-  .mini-tile {
-    min-height: 100px;
-  }
 }
+
 @media (max-width: 480px) {
   .dashboard-grid {
-    gap: var(--space-lg);
+    gap: var(--space-md);
   }
   
   .left-column,
   .right-column {
-    gap: var(--space-lg);
-  }
-  
-  .card-header {
-    flex-direction: column;
-    align-items: flex-start;
     gap: var(--space-md);
   }
   
-  .card-header-left {
-    width: 100%;
-  }
-  
-  .filter-chips {
-    width: 100%;
-    justify-content: flex-start;
-  }
-  
   .small-cards-row {
-    gap: var(--space-sm);
+    gap: var(--space-md);
   }
   
   .revenue-flow {
@@ -227,6 +164,10 @@
     min-height: 200px;
   }
   
+  .bottom-tiles {
+    gap: var(--space-xs);
+  }
+  
   .mini-tile {
     min-height: 80px;
   }
@@ -234,20 +175,20 @@
 
 @media (max-width: 375px) {
   .dashboard-grid {
-    gap: var(--space-md);
+    gap: var(--space-sm);
   }
   
   .left-column,
   .right-column {
-    gap: var(--space-md);
+    gap: var(--space-sm);
   }
   
   .small-cards-row {
-    gap: var(--space-xs);
+    gap: var(--space-sm);
   }
   
   .revenue-flow {
-    min-height: 260px;
+    min-height: 240px;
   }
   
   .my-card-section {
@@ -259,59 +200,6 @@
   }
   
   .mini-tile {
-    min-height: 70px;
+    min-height: 60px;
   }
-}
-
-/* Landscape Tablet Adjustments */
-@media (max-width: 1024px) and (orientation: landscape) {
-  .dashboard-grid {
-    grid-template-columns: 1fr 300px;
-    gap: var(--space-xl);
-  }
-  
-  .right-column {
-    order: 1;
-  }
-}
-
-/* Small Landscape Phone Adjustments */
-@media (max-width: 768px) and (orientation: landscape) and (max-height: 500px) {
-  .app-shell {
-    margin: var(--space-xs);
-    padding: var(--space-sm);
-  }
-  
-  .topbar {
-    height: 44px;
-  }
-  
-  .card {
-    padding: var(--space-sm);
-  }
-  
-  .revenue-flow {
-    min-height: 200px;
-  }
-  
-  .chart-svg {
-    height: 120px;
-  }
-  
-  .chart-y-axis {
-    height: 120px;
-  }
-  
-  .my-card-section {
-    min-height: 120px;
-  }
-  
-  .card-stack {
-    height: 100px;
-  }
-  
-  .credit-card {
-    height: 80px;
-  }
-}
 }

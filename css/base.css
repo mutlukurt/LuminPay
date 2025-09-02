@@ -97,105 +97,42 @@ img {
 }
 
 /* Responsive Layout */
-@media (max-width: 1200px) {
-  .app-shell {
-    margin: var(--space-lg);
-    gap: var(--space-xl);
-  }
-  
-  :root {
-    --sidebar-width: 80px;
-    --right-column-width: 320px;
-  }
-}
-
 @media (max-width: 1024px) {
-  .app-shell {
-    grid-template-columns: var(--sidebar-width) 1fr;
-    grid-template-areas: 
-      "sidebar topbar"
-      "sidebar main";
-    margin: var(--space-md);
-    gap: var(--space-lg);
-  }
-  
-  .dashboard-grid {
-    grid-template-columns: 1fr !important;
-    gap: var(--space-xl) !important;
-  }
-  
-  .right-column {
-    order: 2;
-  }
-  
-  :root {
-    --sidebar-width: 72px;
-    --topbar-height: 64px;
-    --shell-padding: 20px;
-  }
-}
-
-@media (max-width: 768px) {
   .app-shell {
     grid-template-columns: 1fr;
     grid-template-rows: var(--topbar-height) 1fr;
     grid-template-areas: 
       "topbar"
       "main";
-    margin: var(--space-sm);
-    gap: var(--space-md);
-    padding: var(--space-lg);
+    margin: var(--space-md);
+    gap: var(--space-lg);
   }
   
   .sidebar {
     display: none;
   }
-  
-  :root {
-    --topbar-height: 56px;
-    --shell-padding: 16px;
-    --shell-radius: 20px;
-  }
 }
 
-@media (max-width: 640px) {
+@media (max-width: 768px) {
   .app-shell {
-    margin: var(--space-xs);
-    padding: var(--space-md);
-    gap: var(--space-sm);
-  }
-  
-  :root {
-    --topbar-height: 52px;
-    --shell-padding: 12px;
-    --shell-radius: 16px;
+    margin: var(--space-sm);
+    padding: var(--space-lg);
+    gap: var(--space-md);
   }
 }
 
 @media (max-width: 480px) {
   .app-shell {
-    margin: 0;
-    border-radius: 0;
-    padding: var(--space-sm);
-    min-height: 100vh;
-  }
-  
-  :root {
-    --topbar-height: 48px;
-    --shell-padding: 8px;
-    --shell-radius: 12px;
+    margin: var(--space-xs);
+    padding: var(--space-md);
+    border-radius: var(--radius-lg);
   }
 }
 
 @media (max-width: 375px) {
   .app-shell {
-    padding: var(--space-xs);
-  }
-  
-  :root {
-    --font-size-base: 14px;
-    --font-size-lg: 16px;
-    --font-size-xl: 20px;
-    --font-size-2xl: 24px;
+    margin: 0;
+    border-radius: 0;
+    padding: var(--space-sm);
   }
 }

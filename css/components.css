@@ -612,14 +612,27 @@
 @media (max-width: 768px) {
   .topbar {
     padding: 0 var(--space-lg);
+    flex-direction: column;
+    height: auto;
+    min-height: var(--topbar-height);
+    gap: var(--space-md);
+  }
+  
+  .topbar-left {
+    order: 1;
+    flex: none;
+  }
+  
+  .topbar-right {
+    order: 2;
+    flex: none;
+    justify-content: flex-start;
   }
   
   .topbar-center {
-    flex: 3;
-  }
-  
-  .user-greeting {
-    display: none;
+    order: 3;
+    flex: 1;
+    width: 100%;
   }
   
   .card {
@@ -628,75 +641,23 @@
   
   .card-header {
     margin-bottom: var(--space-lg);
-  }
-}
-
-@media (max-width: 640px) {
-  .topbar {
-    padding: 0 var(--space-md);
-    flex-wrap: wrap;
-    height: auto;
-    min-height: var(--topbar-height);
+    flex-direction: column;
+    align-items: flex-start;
+    gap: var(--space-md);
   }
   
-  .topbar-left {
-    flex: 1;
-    min-width: 0;
-  }
-  
-  .page-title {
-    font-size: var(--font-size-lg);
-    white-space: nowrap;
-    overflow: hidden;
-    text-overflow: ellipsis;
-  }
-  
-  .topbar-center {
-    flex: 2;
-    min-width: 200px;
-  }
-  
-  .search-container {
-    max-width: none;
-  }
-  
-  .search-input {
-    height: 40px;
-    font-size: var(--font-size-sm);
-    padding: 0 var(--space-md) 0 40px;
-  }
-  
-  .search-icon {
-    left: var(--space-md);
-  }
-  
-  .topbar-right {
-    flex: 0 0 auto;
-  }
-  
-  .user-chip {
-    padding: var(--space-xs);
-  }
-  
-  .user-avatar {
-    width: 28px;
-    height: 28px;
-  }
-  
-  .card {
-    padding: var(--space-md);
-  }
-  
-  .card-title {
-    font-size: var(--font-size-base);
+  .card-header-left {
+    width: 100%;
   }
   
   .filter-chips {
-    flex-wrap: wrap;
-    gap: var(--space-sm);
+    width: 100%;
+    overflow-x: auto;
+    padding-bottom: var(--space-xs);
   }
   
   .chip {
+    flex-shrink: 0;
     height: 32px;
     padding: 0 var(--space-md);
     font-size: 12px;
@@ -705,22 +666,20 @@
 
 @media (max-width: 480px) {
   .topbar {
-    padding: 0 var(--space-sm);
-    gap: var(--space-sm);
+    padding: 0 var(--space-md);
   }
   
   .page-title {
     font-size: var(--font-size-base);
   }
   
-  .topbar-center {
-    order: 3;
-    flex: 1 1 100%;
-    margin-top: var(--space-sm);
+  .search-container {
+    width: 100%;
   }
   
   .search-input {
     height: 36px;
+    font-size: var(--font-size-sm);
     padding: 0 var(--space-sm) 0 36px;
   }
   
@@ -730,40 +689,29 @@
     height: 16px;
   }
   
+  .user-greeting {
+    display: none;
+  }
+  
+  .user-chip {
+    padding: var(--space-xs);
+  }
+  
   .user-avatar {
     width: 24px;
     height: 24px;
   }
   
   .card {
-    padding: var(--space-sm);
+    padding: var(--space-md);
     border-radius: var(--radius-md);
   }
   
-  .card-header {
-    margin-bottom: var(--space-md);
-    flex-direction: column;
-    align-items: flex-start;
-    gap: var(--space-sm);
-  }
-  
-  .card-header-left {
-    width: 100%;
-  }
-  
-  .view-all-link {
-    align-self: flex-end;
-  }
-  
-  .filter-chips {
-    width: 100%;
-    justify-content: flex-start;
-    overflow-x: auto;
-    padding-bottom: var(--space-xs);
+  .card-title {
+    font-size: var(--font-size-base);
   }
   
   .chip {
-    flex-shrink: 0;
     height: 28px;
     padding: 0 var(--space-sm);
     font-size: 11px;
@@ -772,14 +720,10 @@
 
 @media (max-width: 375px) {
   .topbar {
-    padding: 0 var(--space-xs);
+    padding: 0 var(--space-sm);
   }
   
-  .card {
-    padding: var(--space-xs);
-  }
-  
-  .card-title {
+  .page-title {
     font-size: var(--font-size-sm);
   }
   
@@ -787,17 +731,31 @@
     height: 32px;
     font-size: 12px;
   }
+  
+  .user-avatar {
+    width: 20px;
+    height: 20px;
+  }
+  
+  .card {
+    padding: var(--space-sm);
+    border-radius: var(--radius-sm);
+  }
+  
+  .card-title {
+    font-size: var(--font-size-sm);
+  }
 }
 
 /* Chart Responsive Adjustments */
 @media (max-width: 768px) {
   .chart-y-axis {
-    height: 200px;
+    height: 180px;
     font-size: 10px;
   }
   
   .chart-svg {
-    height: 200px;
+    height: 180px;
   }
   
   .chart-highlight-pill {
@@ -807,16 +765,16 @@
   
   .chart-x-labels {
     font-size: 11px;
-    padding: 0 var(--space-md);
+    padding: 0 var(--space-sm);
   }
   
   .donut-chart {
-    width: 140px;
-    height: 140px;
+    width: 120px;
+    height: 120px;
   }
   
   .donut-value {
-    font-size: var(--font-size-lg);
+    font-size: var(--font-size-base);
   }
   
   .donut-label {
@@ -830,17 +788,13 @@
 }
 
 @media (max-width: 480px) {
-  .chart-container {
-    margin-left: 32px;
-  }
-  
   .chart-y-axis {
-    height: 160px;
+    height: 140px;
     font-size: 9px;
   }
   
   .chart-svg {
-    height: 160px;
+    height: 140px;
   }
   
   .chart-x-labels span {
@@ -848,12 +802,12 @@
   }
   
   .donut-chart {
-    width: 120px;
-    height: 120px;
+    width: 100px;
+    height: 100px;
   }
   
   .donut-value {
-    font-size: var(--font-size-base);
+    font-size: var(--font-size-sm);
   }
   
   .donut-label {
@@ -862,7 +816,7 @@
 }
 
 /* Metric Components Responsive */
-@media (max-width: 640px) {
+@media (max-width: 768px) {
   .metric-value {
     font-size: var(--font-size-xl);
   }
@@ -879,36 +833,16 @@
 
 @media (max-width: 480px) {
   .metric-value {
-    font-size: var(--font-size-lg);
+    font-size: var(--font-size-base);
+  }
+  
+  .metric-subtitle {
+    font-size: 11px;
   }
 }
 
 /* Credit Card Responsive */
 @media (max-width: 768px) {
-  .card-stack {
-    height: 160px;
-  }
-  
-  .credit-card {
-    height: 140px;
-  }
-  
-  .card-balance {
-    font-size: 24px;
-  }
-  
-  .card-number {
-    font-size: var(--font-size-sm);
-    letter-spacing: 1px;
-  }
-  
-  .add-card-btn {
-    width: 28px;
-    height: 28px;
-  }
-}
-
-@media (max-width: 480px) {
   .card-stack {
     height: 140px;
   }
@@ -917,12 +851,36 @@
     height: 120px;
   }
   
+  .card-balance {
+    font-size: 20px;
+  }
+  
+  .card-number {
+    font-size: var(--font-size-sm);
+    letter-spacing: 1px;
+  }
+  
+  .add-card-btn {
+    width: 24px;
+    height: 24px;
+  }
+}
+
+@media (max-width: 480px) {
+  .card-stack {
+    height: 120px;
+  }
+  
+  .credit-card {
+    height: 100px;
+  }
+  
   .card-content {
-    padding: var(--space-lg);
+    padding: var(--space-md);
   }
   
   .card-balance {
-    font-size: 20px;
+    font-size: 18px;
   }
   
   .card-number {
@@ -934,13 +892,13 @@
   }
   
   .add-card-btn {
-    width: 24px;
-    height: 24px;
+    width: 20px;
+    height: 20px;
   }
 }
 
 /* Transaction List Responsive */
-@media (max-width: 640px) {
+@media (max-width: 768px) {
   .transaction-item {
     gap: var(--space-md);
     padding: var(--space-sm) 0;
@@ -973,7 +931,7 @@
 }
 
 /* Mini Tiles Responsive */
-@media (max-width: 640px) {
+@media (max-width: 768px) {
   .mini-tile {
     padding: var(--space-md);
   }

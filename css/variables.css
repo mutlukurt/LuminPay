@@ -70,23 +70,11 @@
 }
 
 /* Responsive Design Tokens */
-@media (max-width: 1200px) {
-  :root {
-    --sidebar-width: 80px;
-    --right-column-width: 320px;
-    --space-2xl: 20px;
-    --space-3xl: 28px;
-  }
-}
-
 @media (max-width: 1024px) {
   :root {
-    --sidebar-width: 72px;
     --topbar-height: 64px;
     --shell-padding: 20px;
-    --space-xl: 18px;
-    --space-2xl: 18px;
-    --space-3xl: 24px;
+    --shell-radius: 24px;
   }
 }
 
@@ -98,34 +86,16 @@
     --space-lg: 14px;
     --space-xl: 16px;
     --space-2xl: 16px;
-    --space-3xl: 20px;
-  }
-}
-
-@media (max-width: 640px) {
-  :root {
-    --topbar-height: 52px;
-    --shell-padding: 12px;
-    --shell-radius: 16px;
-    --radius-lg: 20px;
-    --radius-md: 16px;
-    --radius-sm: 10px;
-    --space-md: 10px;
-    --space-lg: 12px;
-    --space-xl: 14px;
-    --space-2xl: 14px;
   }
 }
 
 @media (max-width: 480px) {
   :root {
     --topbar-height: 48px;
-    --shell-padding: 8px;
-    --shell-radius: 12px;
+    --shell-padding: 12px;
+    --shell-radius: 16px;
     --radius-lg: 16px;
     --radius-md: 12px;
-    --radius-sm: 8px;
-    --space-sm: 6px;
     --space-md: 8px;
     --space-lg: 10px;
     --space-xl: 12px;
@@ -135,35 +105,19 @@
 
 @media (max-width: 375px) {
   :root {
+    --topbar-height: 44px;
+    --shell-padding: 8px;
+    --shell-radius: 12px;
+    --radius-lg: 12px;
+    --radius-md: 8px;
     --font-size-xs: 11px;
     --font-size-sm: 12px;
     --font-size-base: 14px;
     --font-size-lg: 16px;
-    --font-size-xl: 20px;
-    --font-size-2xl: 24px;
-    --space-xs: 3px;
-    --space-sm: 5px;
-    --space-md: 7px;
-    --space-lg: 9px;
-    --space-xl: 11px;
-    --space-2xl: 11px;
-  }
-}
-
-/* Touch Device Styles */
-.touch-device .touch-active {
-  transform: scale(0.98);
-  opacity: 0.8;
-}
-
-/* Mobile Search Focus State */
-@media (max-width: 480px) {
-  .topbar.search-focused .topbar-left,
-  .topbar.search-focused .topbar-right {
-    opacity: 0.5;
-  }
-  
-  .topbar.search-focused .topbar-center {
-    flex: 1;
+    --space-sm: 4px;
+    --space-md: 6px;
+    --space-lg: 8px;
+    --space-xl: 10px;
+    --space-2xl: 10px;
   }
 }
