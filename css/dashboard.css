@@ -100,6 +100,7 @@
   
   .bottom-tiles {
     grid-template-columns: 1fr;
+    gap: var(--space-md);
   }
 }
 
@@ -140,8 +141,51 @@
   .card-balance {
     font-size: 24px;
   }
+  
+  .dashboard-grid {
+    gap: var(--space-xl);
+  }
+  
+  .left-column,
+  .right-column {
+    gap: var(--space-xl);
+  }
 }
 
+@media (max-width: 640px) {
+  .dashboard-grid {
+    gap: var(--space-lg);
+  }
+  
+  .left-column,
+  .right-column {
+    gap: var(--space-lg);
+  }
+  
+  .small-cards-row {
+    gap: var(--space-md);
+  }
+  
+  .revenue-flow {
+    min-height: 320px;
+  }
+  
+  .my-card-section {
+    min-height: 200px;
+  }
+  
+  .transactions-section {
+    min-height: 250px;
+  }
+  
+  .bottom-tiles {
+    gap: var(--space-sm);
+  }
+  
+  .mini-tile {
+    min-height: 100px;
+  }
+}
 @media (max-width: 480px) {
   .dashboard-grid {
     gap: var(--space-lg);
@@ -166,4 +210,108 @@
     width: 100%;
     justify-content: flex-start;
   }
+  
+  .small-cards-row {
+    gap: var(--space-sm);
+  }
+  
+  .revenue-flow {
+    min-height: 280px;
+  }
+  
+  .my-card-section {
+    min-height: 180px;
+  }
+  
+  .transactions-section {
+    min-height: 200px;
+  }
+  
+  .mini-tile {
+    min-height: 80px;
+  }
+}
+
+@media (max-width: 375px) {
+  .dashboard-grid {
+    gap: var(--space-md);
+  }
+  
+  .left-column,
+  .right-column {
+    gap: var(--space-md);
+  }
+  
+  .small-cards-row {
+    gap: var(--space-xs);
+  }
+  
+  .revenue-flow {
+    min-height: 260px;
+  }
+  
+  .my-card-section {
+    min-height: 160px;
+  }
+  
+  .transactions-section {
+    min-height: 180px;
+  }
+  
+  .mini-tile {
+    min-height: 70px;
+  }
+}
+
+/* Landscape Tablet Adjustments */
+@media (max-width: 1024px) and (orientation: landscape) {
+  .dashboard-grid {
+    grid-template-columns: 1fr 300px;
+    gap: var(--space-xl);
+  }
+  
+  .right-column {
+    order: 1;
+  }
+}
+
+/* Small Landscape Phone Adjustments */
+@media (max-width: 768px) and (orientation: landscape) and (max-height: 500px) {
+  .app-shell {
+    margin: var(--space-xs);
+    padding: var(--space-sm);
+  }
+  
+  .topbar {
+    height: 44px;
+  }
+  
+  .card {
+    padding: var(--space-sm);
+  }
+  
+  .revenue-flow {
+    min-height: 200px;
+  }
+  
+  .chart-svg {
+    height: 120px;
+  }
+  
+  .chart-y-axis {
+    height: 120px;
+  }
+  
+  .my-card-section {
+    min-height: 120px;
+  }
+  
+  .card-stack {
+    height: 100px;
+  }
+  
+  .credit-card {
+    height: 80px;
+  }
+}
 }

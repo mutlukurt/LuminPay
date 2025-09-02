@@ -630,3 +630,391 @@
     margin-bottom: var(--space-lg);
   }
 }
+
+@media (max-width: 640px) {
+  .topbar {
+    padding: 0 var(--space-md);
+    flex-wrap: wrap;
+    height: auto;
+    min-height: var(--topbar-height);
+  }
+  
+  .topbar-left {
+    flex: 1;
+    min-width: 0;
+  }
+  
+  .page-title {
+    font-size: var(--font-size-lg);
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
+  
+  .topbar-center {
+    flex: 2;
+    min-width: 200px;
+  }
+  
+  .search-container {
+    max-width: none;
+  }
+  
+  .search-input {
+    height: 40px;
+    font-size: var(--font-size-sm);
+    padding: 0 var(--space-md) 0 40px;
+  }
+  
+  .search-icon {
+    left: var(--space-md);
+  }
+  
+  .topbar-right {
+    flex: 0 0 auto;
+  }
+  
+  .user-chip {
+    padding: var(--space-xs);
+  }
+  
+  .user-avatar {
+    width: 28px;
+    height: 28px;
+  }
+  
+  .card {
+    padding: var(--space-md);
+  }
+  
+  .card-title {
+    font-size: var(--font-size-base);
+  }
+  
+  .filter-chips {
+    flex-wrap: wrap;
+    gap: var(--space-sm);
+  }
+  
+  .chip {
+    height: 32px;
+    padding: 0 var(--space-md);
+    font-size: 12px;
+  }
+}
+
+@media (max-width: 480px) {
+  .topbar {
+    padding: 0 var(--space-sm);
+    gap: var(--space-sm);
+  }
+  
+  .page-title {
+    font-size: var(--font-size-base);
+  }
+  
+  .topbar-center {
+    order: 3;
+    flex: 1 1 100%;
+    margin-top: var(--space-sm);
+  }
+  
+  .search-input {
+    height: 36px;
+    padding: 0 var(--space-sm) 0 36px;
+  }
+  
+  .search-icon {
+    left: var(--space-sm);
+    width: 16px;
+    height: 16px;
+  }
+  
+  .user-avatar {
+    width: 24px;
+    height: 24px;
+  }
+  
+  .card {
+    padding: var(--space-sm);
+    border-radius: var(--radius-md);
+  }
+  
+  .card-header {
+    margin-bottom: var(--space-md);
+    flex-direction: column;
+    align-items: flex-start;
+    gap: var(--space-sm);
+  }
+  
+  .card-header-left {
+    width: 100%;
+  }
+  
+  .view-all-link {
+    align-self: flex-end;
+  }
+  
+  .filter-chips {
+    width: 100%;
+    justify-content: flex-start;
+    overflow-x: auto;
+    padding-bottom: var(--space-xs);
+  }
+  
+  .chip {
+    flex-shrink: 0;
+    height: 28px;
+    padding: 0 var(--space-sm);
+    font-size: 11px;
+  }
+}
+
+@media (max-width: 375px) {
+  .topbar {
+    padding: 0 var(--space-xs);
+  }
+  
+  .card {
+    padding: var(--space-xs);
+  }
+  
+  .card-title {
+    font-size: var(--font-size-sm);
+  }
+  
+  .search-input {
+    height: 32px;
+    font-size: 12px;
+  }
+}
+
+/* Chart Responsive Adjustments */
+@media (max-width: 768px) {
+  .chart-y-axis {
+    height: 200px;
+    font-size: 10px;
+  }
+  
+  .chart-svg {
+    height: 200px;
+  }
+  
+  .chart-highlight-pill {
+    font-size: 10px;
+    padding: 4px 8px;
+  }
+  
+  .chart-x-labels {
+    font-size: 11px;
+    padding: 0 var(--space-md);
+  }
+  
+  .donut-chart {
+    width: 140px;
+    height: 140px;
+  }
+  
+  .donut-value {
+    font-size: var(--font-size-lg);
+  }
+  
+  .donut-label {
+    font-size: 11px;
+  }
+  
+  .legend-label,
+  .legend-value {
+    font-size: 12px;
+  }
+}
+
+@media (max-width: 480px) {
+  .chart-container {
+    margin-left: 32px;
+  }
+  
+  .chart-y-axis {
+    height: 160px;
+    font-size: 9px;
+  }
+  
+  .chart-svg {
+    height: 160px;
+  }
+  
+  .chart-x-labels span {
+    font-size: 10px;
+  }
+  
+  .donut-chart {
+    width: 120px;
+    height: 120px;
+  }
+  
+  .donut-value {
+    font-size: var(--font-size-base);
+  }
+  
+  .donut-label {
+    font-size: 10px;
+  }
+}
+
+/* Metric Components Responsive */
+@media (max-width: 640px) {
+  .metric-value {
+    font-size: var(--font-size-xl);
+  }
+  
+  .metric-subtitle {
+    font-size: 12px;
+  }
+  
+  .metric-chip {
+    font-size: 10px;
+    padding: 4px 8px;
+  }
+}
+
+@media (max-width: 480px) {
+  .metric-value {
+    font-size: var(--font-size-lg);
+  }
+}
+
+/* Credit Card Responsive */
+@media (max-width: 768px) {
+  .card-stack {
+    height: 160px;
+  }
+  
+  .credit-card {
+    height: 140px;
+  }
+  
+  .card-balance {
+    font-size: 24px;
+  }
+  
+  .card-number {
+    font-size: var(--font-size-sm);
+    letter-spacing: 1px;
+  }
+  
+  .add-card-btn {
+    width: 28px;
+    height: 28px;
+  }
+}
+
+@media (max-width: 480px) {
+  .card-stack {
+    height: 140px;
+  }
+  
+  .credit-card {
+    height: 120px;
+  }
+  
+  .card-content {
+    padding: var(--space-lg);
+  }
+  
+  .card-balance {
+    font-size: 20px;
+  }
+  
+  .card-number {
+    font-size: 12px;
+  }
+  
+  .card-expiry {
+    font-size: 11px;
+  }
+  
+  .add-card-btn {
+    width: 24px;
+    height: 24px;
+  }
+}
+
+/* Transaction List Responsive */
+@media (max-width: 640px) {
+  .transaction-item {
+    gap: var(--space-md);
+    padding: var(--space-sm) 0;
+  }
+  
+  .transaction-icon {
+    width: 36px;
+    height: 36px;
+  }
+  
+  .transaction-name {
+    font-size: var(--font-size-sm);
+  }
+  
+  .transaction-amount {
+    font-size: var(--font-size-sm);
+  }
+}
+
+@media (max-width: 480px) {
+  .transaction-icon {
+    width: 32px;
+    height: 32px;
+  }
+  
+  .transaction-name,
+  .transaction-amount {
+    font-size: 12px;
+  }
+}
+
+/* Mini Tiles Responsive */
+@media (max-width: 640px) {
+  .mini-tile {
+    padding: var(--space-md);
+  }
+  
+  .mini-title {
+    font-size: var(--font-size-sm);
+  }
+  
+  .mini-subtitle {
+    font-size: 11px;
+  }
+  
+  .mini-avatar {
+    width: 20px;
+    height: 20px;
+  }
+  
+  .mini-chart {
+    height: 32px;
+  }
+}
+
+@media (max-width: 480px) {
+  .mini-tile {
+    padding: var(--space-sm);
+  }
+  
+  .mini-title {
+    font-size: 12px;
+  }
+  
+  .mini-subtitle {
+    font-size: 10px;
+  }
+  
+  .mini-avatar {
+    width: 18px;
+    height: 18px;
+  }
+  
+  .mini-chart {
+    height: 28px;
+  }
+}

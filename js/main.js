@@ -224,13 +224,94 @@ class Dashboard {
 // Initialize dashboard when DOM is loaded
 document.addEventListener('DOMContentLoaded', () => {
   new Dashboard();
+  
+  // Handle responsive behavior
+  handleResponsiveLayout();
+  window.addEventListener('resize', handleResponsiveLayout);
+  window.addEventListener('orientationchange', () => {
+    setTimeout(handleResponsiveLayout, 100);
+  });
 });
+
+// Responsive layout handler
+function handleResponsiveLayout() {
+  const width = window.innerWidth;
+  const body = document.body;
+  
+  // Remove existing responsive classes
+  body.classList.remove('mobile', 'tablet', 'desktop');
+  
+  // Add appropriate class based on screen size
+  if (width <= 768) {
+    body.classList.add('mobile');
+    handleMobileLayout();
+  } else if (width <= 1024) {
+    body.classList.add('tablet');
+    handleTabletLayout();
+  } else {
+    body.classList.add('desktop');
+  }
+  
+  // Handle search input on mobile
+  handleMobileSearch();
+}
+
+function handleMobileLayout() {
+  // Adjust chart container for mobile
+  const chartContainer = document.querySelector('.chart-container');
+  if (chartContainer) {
+    const barChart = chartContainer.querySelector('.bar-chart');
+    if (barChart && window.innerWidth <= 480) {
+      barChart.style.marginLeft = '32px';
+    }
+  }
+  
+  // Ensure proper scrolling for filter chips on mobile
+  const filterChips = document.querySelector('.filter-chips');
+  if (filterChips && window.innerWidth <= 480) {
+    filterChips.style.overflowX = 'auto';
+    filterChips.style.scrollbarWidth = 'none';
+    filterChips.style.msOverflowStyle = 'none';
+  }
+}
+
+function handleTabletLayout() {
+  // Reset any mobile-specific adjustments
+  const barChart = document.querySelector('.bar-chart');
+  if (barChart) {
+    barChart.style.marginLeft = '48px';
+  }
+}
+
+function handleMobileSearch() {
+  const searchInput = document.querySelector('.search-input');
+  const topbar = document.querySelector('.topbar');
+  
+  if (searchInput && topbar && window.innerWidth <= 480) {
+    // On very small screens, make search full width when focused
+    searchInput.addEventListener('focus', () => {
+      topbar.classList.add('search-focused');
+    });
+    
+    searchInput.addEventListener('blur', () => {
+      topbar.classList.remove('search-focused');
+    });
+  }
+}
 
 // Additional focus management for keyboard navigation
 document.addEventListener('keydown', (e) => {
   // Tab navigation enhancement
   if (e.key === 'Tab') {
     document.body.classList.add('keyboard-navigation');
+  }
+  
+  // Handle escape key to close mobile search
+  if (e.key === 'Escape') {
+    const searchInput = document.querySelector('.search-input');
+    if (searchInput && document.activeElement === searchInput) {
+      searchInput.blur();
+    }
   }
 });
 
@@ -251,3 +332,33 @@ document.querySelectorAll('a[href^="#"]').forEach(anchor => {
     }
   });
 });
+
+// Touch event handling for better mobile interaction
+if ('ontouchstart' in window) {
+  document.body.classList.add('touch-device');
+  
+  // Add touch feedback for interactive elements
+  const interactiveElements = document.querySelectorAll('button, .chip, .nav-item, .transaction-item');
+  
+  interactiveElements.forEach(element => {
+    element.addEventListener('touchstart', function() {
+      this.classList.add('touch-active');
+    });
+    
+    element.addEventListener('touchend', function() {
+      setTimeout(() => {
+        this.classList.remove('touch-active');
+      }, 150);
+    });
+  });
+}
+
+// Prevent zoom on double tap for iOS
+let lastTouchEnd = 0;
+document.addEventListener('touchend', function (event) {
+  const now = (new Date()).getTime();
+  if (now - lastTouchEnd <= 300) {
+    event.preventDefault();
+  }
+  lastTouchEnd = now;
+}, false);
