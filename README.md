@@ -2,6 +2,8 @@
 
 A pixel-perfect, modern finance dashboard built with pure HTML, CSS, and JavaScript. Features a sophisticated dark theme with glassmorphism effects, interactive charts, and a responsive layout.
 
+**[🌐 Live Demo](https://mutlukurt.github.io/LuminPay/)**
+
 ![Dashboard Preview 1](assets/1.png)
 ![Dashboard Preview 2](assets/2.png)
 
