@@ -1,0 +1,169 @@
+/* Dashboard Grid Layout */
+.main-content {
+  grid-area: main;
+  overflow: auto;
+}
+
+.dashboard-grid {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) var(--right-column-width);
+  gap: var(--space-2xl);
+  height: 100%;
+}
+
+.left-column {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-2xl);
+}
+
+.right-column {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-2xl);
+}
+
+/* Revenue Flow Specific */
+.revenue-flow {
+  min-height: 400px;
+}
+
+.revenue-flow .chart-container {
+  margin-top: var(--space-lg);
+}
+
+/* Small Cards Row */
+.small-cards-row {
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+  gap: var(--space-2xl);
+}
+
+.available-card {
+  grid-column: span 1;
+}
+
+.income-card,
+.expense-card {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  min-height: 200px;
+}
+
+/* My Card Section */
+.my-card-section {
+  min-height: 280px;
+}
+
+/* Transactions Section */
+.transactions-section {
+  flex: 1;
+  min-height: 300px;
+}
+
+/* Bottom Tiles */
+.bottom-tiles {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: var(--space-lg);
+  margin-top: auto;
+}
+
+.mini-tile {
+  min-height: 120px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+
+.spending {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+
+.mini-chart {
+  margin-top: auto;
+}
+
+/* Responsive Dashboard Layout */
+@media (max-width: 1024px) {
+  .dashboard-grid {
+    grid-template-columns: 1fr;
+    gap: var(--space-2xl);
+  }
+  
+  .right-column {
+    order: 2;
+  }
+  
+  .bottom-tiles {
+    grid-template-columns: 1fr;
+  }
+}
+
+@media (max-width: 768px) {
+  .small-cards-row {
+    grid-template-columns: 1fr;
+    gap: var(--space-lg);
+  }
+  
+  .filter-chips {
+    flex-wrap: wrap;
+    gap: var(--space-sm);
+  }
+  
+  .chip {
+    height: 32px;
+    padding: 0 var(--space-md);
+    font-size: 12px;
+  }
+  
+  .revenue-flow {
+    min-height: 350px;
+  }
+  
+  .chart-y-axis {
+    height: 200px;
+    font-size: 10px;
+  }
+  
+  .chart-svg {
+    height: 200px;
+  }
+  
+  .my-card-section {
+    min-height: 240px;
+  }
+  
+  .card-balance {
+    font-size: 24px;
+  }
+}
+
+@media (max-width: 480px) {
+  .dashboard-grid {
+    gap: var(--space-lg);
+  }
+  
+  .left-column,
+  .right-column {
+    gap: var(--space-lg);
+  }
+  
+  .card-header {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: var(--space-md);
+  }
+  
+  .card-header-left {
+    width: 100%;
+  }
+  
+  .filter-chips {
+    width: 100%;
+    justify-content: flex-start;
+  }
+}
