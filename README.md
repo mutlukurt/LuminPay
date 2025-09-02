@@ -151,9 +151,9 @@ This project is licensed under the MIT License - see the [LICENSE](LICENSE) file
 
 ## 📞 Contact
 
-**Your Name** - [@yourusername](https://twitter.com/yourusername) - email@example.com
+**Mutlu Kurt** - [@mutlukurt](https://github.com/mutlukurt)
 
-Project Link: [https://github.com/yourusername/luminpay-dashboard](https://github.com/yourusername/luminpay-dashboard)
+Project Link: [https://github.com/mutlukurt/LuminPay](https://github.com/mutlukurt/LuminPay)
 
 ---
 
