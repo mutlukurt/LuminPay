@@ -1,332 +1,91 @@
 /**
- * Mobile Menu & Sidebar Management
- * Handles off-canvas sidebar, focus trapping, and responsive interactions
+ * Off-Canvas Mobile Menu
+ * Handles sidebar drawer with proper focus trapping and accessibility
  */
 
-class MobileMenu {
-  constructor() {
-    this.sidebar = null;
-    this.hamburgerBtn = null;
-    this.overlay = null;
-    this.isOpen = false;
-    this.focusableElements = [];
-    this.lastFocusedElement = null;
-    
-    this.init();
-  }
+(function(){
+  const qs = s => document.querySelector(s);
+  const sidebar = qs('#sidebar');
+  const toggle  = qs('#navToggle');
+  const backdrop = qs('#backdrop');
+  if(!sidebar || !toggle || !backdrop) return;
 
-  init() {
-    this.createMobileElements();
-    this.bindEvents();
-    this.handleResize();
-  }
+  const focusable = () => sidebar.querySelectorAll(
+    'a[href], button:not([disabled]), [tabindex]:not([tabindex="-1"])'
+  );
+  let lastFocused = null;
 
-  createMobileElements() {
-    // Create hamburger button
-    this.hamburgerBtn = document.createElement('button');
-    this.hamburgerBtn.className = 'hamburger-btn';
-    this.hamburgerBtn.setAttribute('aria-label', 'Toggle navigation menu');
-    this.hamburgerBtn.setAttribute('aria-expanded', 'false');
-    this.hamburgerBtn.innerHTML = `
-      <span></span>
-      <span></span>
-      <span></span>
-    `;
-
-    // Create overlay
-    this.overlay = document.createElement('div');
-    this.overlay.className = 'sidebar-overlay';
-    this.overlay.setAttribute('aria-hidden', 'true');
-
-    // Get existing sidebar
-    this.sidebar = document.querySelector('.sidebar');
-    if (this.sidebar) {
-      this.sidebar.setAttribute('role', 'dialog');
-      this.sidebar.setAttribute('aria-modal', 'true');
-      this.sidebar.setAttribute('aria-label', 'Navigation menu');
-    }
-
-    // Insert hamburger into topbar
-    const topbarLeft = document.querySelector('.topbar-left');
-    if (topbarLeft) {
-      topbarLeft.insertBefore(this.hamburgerBtn, topbarLeft.firstChild);
-    }
-
-    // Insert overlay into body
-    document.body.appendChild(this.overlay);
-  }
-
-  bindEvents() {
-    // Hamburger click
-    this.hamburgerBtn?.addEventListener('click', (e) => {
-      e.preventDefault();
-      this.toggle();
-    });
-
-    // Overlay click
-    this.overlay?.addEventListener('click', () => {
-      this.close();
-    });
-
-    // Escape key
-    document.addEventListener('keydown', (e) => {
-      if (e.key === 'Escape' && this.isOpen) {
-        this.close();
-      }
-      
-      if (this.isOpen && e.key === 'Tab') {
-        this.handleTabKey(e);
-      }
-    });
-
-    // Sidebar nav item clicks (close menu on mobile)
-    const navItems = document.querySelectorAll('.nav-item');
-    navItems.forEach(item => {
-      item.addEventListener('click', () => {
-        if (window.innerWidth <= 1023) {
-          this.close();
-        }
-      });
-    });
-
-    // Window resize
-    window.addEventListener('resize', () => {
-      this.handleResize();
-    });
-
-    // Prevent scroll when menu is open
-    document.addEventListener('touchmove', (e) => {
-      if (this.isOpen && !this.sidebar?.contains(e.target)) {
-        e.preventDefault();
-      }
-    }, { passive: false });
-  }
-
-  toggle() {
-    if (this.isOpen) {
-      this.close();
-    } else {
-      this.open();
-    }
-  }
-
-  open() {
-    if (this.isOpen) return;
-
-    this.isOpen = true;
-    this.lastFocusedElement = document.activeElement;
-
-    // Add classes
-    this.sidebar?.classList.add('is-open');
-    this.overlay?.classList.add('is-open');
-    this.hamburgerBtn?.classList.add('is-open');
+  function openMenu(){
+    lastFocused = document.activeElement;
     document.body.classList.add('no-scroll');
-
-    // Update ARIA
-    this.hamburgerBtn?.setAttribute('aria-expanded', 'true');
-    this.overlay?.setAttribute('aria-hidden', 'false');
-
-    // Set focus and trap
-    requestAnimationFrame(() => {
-      this.updateFocusableElements();
-      this.trapFocus();
-    });
+    sidebar.classList.add('is-open');
+    backdrop.hidden = false;
+    // force reflow to animate opacity
+    void backdrop.offsetWidth;
+    backdrop.classList.add('is-open');
+    toggle.classList.add('is-open');
+    toggle.setAttribute('aria-expanded','true');
+    // focus trap: focus first focusable or sidebar itself
+    const f = focusable()[0] || sidebar;
+    f.focus({preventScroll:true});
+    document.addEventListener('keydown', onKeydown);
+    document.addEventListener('focus', trapFocus, true);
   }
 
-  close() {
-    if (!this.isOpen) return;
-
-    this.isOpen = false;
-
-    // Remove classes
-    this.sidebar?.classList.remove('is-open');
-    this.overlay?.classList.remove('is-open');
-    this.hamburgerBtn?.classList.remove('is-open');
+  function closeMenu(){
     document.body.classList.remove('no-scroll');
+    sidebar.classList.remove('is-open');
+    backdrop.classList.remove('is-open');
+    toggle.classList.remove('is-open');
+    toggle.setAttribute('aria-expanded','false');
+    setTimeout(()=>{ backdrop.hidden = true; }, 180);
+    document.removeEventListener('keydown', onKeydown);
+    document.removeEventListener('focus', trapFocus, true);
+    if (lastFocused) lastFocused.focus({preventScroll:true});
+  }
 
-    // Update ARIA
-    this.hamburgerBtn?.setAttribute('aria-expanded', 'false');
-    this.overlay?.setAttribute('aria-hidden', 'true');
-
-    // Return focus
-    if (this.lastFocusedElement) {
-      this.lastFocusedElement.focus();
-      this.lastFocusedElement = null;
+  function onKeydown(e){
+    if(e.key === 'Escape') closeMenu();
+    if(e.key === 'Tab'){
+      // Circular tabbing inside sidebar
+      const nodes = Array.from(focusable());
+      if(nodes.length === 0) return;
+      const first = nodes[0], last = nodes[nodes.length - 1];
+      if(e.shiftKey && document.activeElement === first){ last.focus(); e.preventDefault(); }
+      else if(!e.shiftKey && document.activeElement === last){ first.focus(); e.preventDefault(); }
     }
   }
 
-  updateFocusableElements() {
-    if (!this.sidebar) return;
-
-    const focusableSelectors = [
-      'button:not([disabled])',
-      'a[href]',
-      'input:not([disabled])',
-      'select:not([disabled])',
-      'textarea:not([disabled])',
-      '[tabindex]:not([tabindex="-1"])'
-    ];
-
-    this.focusableElements = Array.from(
-      this.sidebar.querySelectorAll(focusableSelectors.join(', '))
-    ).filter(el => {
-      return el.offsetWidth > 0 && el.offsetHeight > 0;
-    });
-  }
-
-  trapFocus() {
-    if (this.focusableElements.length === 0) return;
-
-    const firstElement = this.focusableElements[0];
-    const lastElement = this.focusableElements[this.focusableElements.length - 1];
-
-    // Focus first element
-    firstElement.focus();
-
-    // Store references for tab handling
-    this.firstFocusableElement = firstElement;
-    this.lastFocusableElement = lastElement;
-  }
-
-  handleTabKey(e) {
-    if (this.focusableElements.length === 0) return;
-
-    const isTabPressed = e.key === 'Tab';
-    if (!isTabPressed) return;
-
-    if (e.shiftKey) {
-      // Shift + Tab
-      if (document.activeElement === this.firstFocusableElement) {
-        e.preventDefault();
-        this.lastFocusableElement.focus();
-      }
-    } else {
-      // Tab
-      if (document.activeElement === this.lastFocusableElement) {
-        e.preventDefault();
-        this.firstFocusableElement.focus();
-      }
+  function trapFocus(e){
+    if(!sidebar.classList.contains('is-open')) return;
+    if(!sidebar.contains(e.target)) {
+      const f = focusable()[0] || sidebar;
+      f.focus();
     }
   }
 
-  handleResize() {
-    // Close menu on desktop
-    if (window.innerWidth > 1023 && this.isOpen) {
-      this.close();
+  toggle.addEventListener('click', () => {
+    const open = sidebar.classList.contains('is-open');
+    open ? closeMenu() : openMenu();
+  });
+  
+  backdrop.addEventListener('click', closeMenu);
+  
+  // Close when a nav link is clicked
+  sidebar.addEventListener('click', (e)=>{
+    const el = e.target.closest('a,button');
+    if(el) closeMenu();
+  });
+
+  // Avoid "page slides to the side" during animation on iOS
+  window.addEventListener('touchmove', (e)=>{
+    if(sidebar.classList.contains('is-open') && !sidebar.contains(e.target)) e.preventDefault();
+  }, {passive:false});
+
+  // Handle window resize - close menu if switching to desktop
+  window.addEventListener('resize', () => {
+    if (window.innerWidth > 1023 && sidebar.classList.contains('is-open')) {
+      closeMenu();
     }
-
-    // Update focusable elements if menu is open
-    if (this.isOpen) {
-      this.updateFocusableElements();
-    }
-  }
-}
-
-/**
- * Enhanced Dashboard Interactions for Mobile
- */
-class ResponsiveDashboard {
-  constructor() {
-    this.init();
-  }
-
-  init() {
-    this.setupTouchInteractions();
-    this.setupScrollObserver();
-    this.setupChartResponsiveness();
-  }
-
-  setupTouchInteractions() {
-    // Add touch feedback for interactive elements
-    const interactiveElements = document.querySelectorAll(
-      '.chip, .nav-item, .transaction-item, .view-all-link, .menu-button'
-    );
-
-    interactiveElements.forEach(element => {
-      element.addEventListener('touchstart', function() {
-        this.style.transform = 'scale(0.98)';
-        this.style.opacity = '0.8';
-      }, { passive: true });
-
-      element.addEventListener('touchend', function() {
-        this.style.transform = '';
-        this.style.opacity = '';
-      }, { passive: true });
-
-      element.addEventListener('touchcancel', function() {
-        this.style.transform = '';
-        this.style.opacity = '';
-      }, { passive: true });
-    });
-  }
-
-  setupScrollObserver() {
-    // Optimize scroll performance
-    let ticking = false;
-
-    const handleScroll = () => {
-      if (!ticking) {
-        requestAnimationFrame(() => {
-          this.updateScrollState();
-          ticking = false;
-        });
-        ticking = true;
-      }
-    };
-
-    window.addEventListener('scroll', handleScroll, { passive: true });
-  }
-
-  updateScrollState() {
-    const scrollY = window.scrollY;
-    const topbar = document.querySelector('.topbar');
-    
-    if (topbar) {
-      if (scrollY > 20) {
-        topbar.style.boxShadow = 'var(--shadow-2)';
-      } else {
-        topbar.style.boxShadow = 'var(--shadow-1)';
-      }
-    }
-  }
-
-  setupChartResponsiveness() {
-    // Ensure charts maintain aspect ratios
-    const charts = document.querySelectorAll('.chart-svg');
-    
-    charts.forEach(chart => {
-      chart.setAttribute('preserveAspectRatio', 'xMidYMid meet');
-      
-      // Add responsive class based on parent
-      const parent = chart.closest('.revenue-flow, .available-card, .spending');
-      if (parent) {
-        if (parent.classList.contains('revenue-flow')) {
-          chart.parentElement.classList.add('chart-bar');
-        } else if (parent.classList.contains('available-card')) {
-          chart.parentElement.classList.add('chart-donut');
-        } else if (parent.classList.contains('spending')) {
-          chart.parentElement.classList.add('chart-line');
-        }
-      }
-    });
-  }
-}
-
-// Initialize when DOM is ready
-document.addEventListener('DOMContentLoaded', () => {
-  new MobileMenu();
-  new ResponsiveDashboard();
-});
-
-// Handle orientation changes
-window.addEventListener('orientationchange', () => {
-  setTimeout(() => {
-    // Recalculate viewport height for mobile browsers
-    const vh = window.innerHeight * 0.01;
-    document.documentElement.style.setProperty('--vh', `${vh}px`);
-  }, 100);
-});
-
-// Set initial viewport height
-const vh = window.innerHeight * 0.01;
-document.documentElement.style.setProperty('--vh', `${vh}px`);
+  });
+})();
