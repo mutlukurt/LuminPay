@@ -7,6 +7,13 @@ A pixel-perfect, modern finance dashboard built with pure HTML, CSS, and JavaScr
 ![Dashboard Preview 1](assets/1.png)
 ![Dashboard Preview 2](assets/2.png)
 
+## 📱 Mobile Responsive Preview
+
+<p align="center">
+  <img src="./assets/3.png" alt="Mobile view 1" width="45%"/>
+  <img src="./assets/4.png" alt="Mobile view 2" width="45%"/>
+</p>
+
 ## ✨ Features
 
 ### 🎨 **Modern Design System**
