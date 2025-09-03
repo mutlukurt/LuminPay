@@ -470,12 +470,15 @@
   display: flex;
   flex-direction: column;
   justify-content: space-between;
+  min-height: 0;
+  overflow: visible;
 }
 
 .card-top {
   display: flex;
   justify-content: space-between;
   align-items: flex-start;
+  margin-bottom: auto;
 }
 
 .card-label {
@@ -494,6 +497,7 @@
   justify-content: center;
   color: white;
   transition: all 0.2s ease;
+  flex-shrink: 0;
 }
 
 .add-card-btn:hover {
@@ -506,6 +510,7 @@
   font-weight: var(--font-weight-semibold);
   color: white;
   margin-bottom: var(--space-lg);
+  line-height: 1.2;
 }
 
 .card-number {
@@ -514,11 +519,14 @@
   font-weight: var(--font-weight-medium);
   letter-spacing: 2px;
   margin-bottom: var(--space-xs);
+  line-height: 1.3;
 }
 
 .card-expiry {
   font-size: var(--font-size-sm);
   color: rgba(255, 255, 255, 0.7);
+  line-height: 1.2;
+  margin-top: auto;
 }
 
 /* Transactions List */
