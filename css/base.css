@@ -94,6 +94,9 @@ img {
   border-radius: var(--shell-radius);
   margin: var(--space-2xl);
   box-shadow: var(--shadow-2);
+  width: 100%;
+  max-width: 100%;
+  box-sizing: border-box;
 }
 
 /* Responsive Layout */
@@ -106,6 +109,8 @@ img {
       "main";
     margin: var(--space-md);
     gap: var(--space-lg);
+    width: calc(100vw - 2 * var(--space-md));
+    max-width: calc(100vw - 2 * var(--space-md));
   }
   
   .sidebar {
@@ -118,6 +123,8 @@ img {
     margin: var(--space-sm);
     padding: var(--space-lg);
     gap: var(--space-md);
+    width: calc(100vw - 2 * var(--space-sm));
+    max-width: calc(100vw - 2 * var(--space-sm));
   }
 }
 
@@ -125,6 +132,8 @@ img {
   .app-shell {
     margin: var(--space-xs);
     padding: var(--space-md);
+    width: calc(100vw - 2 * var(--space-xs));
+    max-width: calc(100vw - 2 * var(--space-xs));
     border-radius: var(--radius-lg);
   }
 }
@@ -134,5 +143,7 @@ img {
     margin: 0;
     border-radius: 0;
     padding: var(--space-sm);
+    width: 100vw;
+    max-width: 100vw;
   }
 }
