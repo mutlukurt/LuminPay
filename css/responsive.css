@@ -712,17 +712,149 @@ h1, h2, h3, p, .chip, .btn { overflow-wrap:anywhere; }
 @media (max-width:425px){
   .app-shell { padding: 12px; }
   .dashboard-grid { gap: 14px; }
+  
+  /* Fix topbar layout for search */
+  .topbar {
+    flex-direction: column;
+    align-items: stretch;
+    gap: 12px;
+    padding: 12px;
+    height: auto;
+    min-height: 60px;
+  }
+  
+  .topbar-left {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    width: 100%;
+  }
+  
+  .topbar-center {
+    order: 3;
+    width: 100%;
+    flex: none;
+  }
+  
+  .topbar-right {
+    order: 2;
+    flex: none;
+    justify-content: flex-end;
+  }
+  
+  .search-container {
+    width: 100%;
+    max-width: none;
+  }
+  
+  .search-input {
+    width: 100%;
+    height: 40px;
+    font-size: 14px;
+    padding: 0 16px 0 44px;
+  }
+  
+  .search-icon {
+    left: 16px;
+    width: 18px;
+    height: 18px;
+  }
+  
+  .page-title {
+    font-size: 18px;
+    margin: 0;
+  }
+  
+  .user-chip {
+    padding: 6px 8px;
+    gap: 8px;
+  }
+  
+  .user-avatar {
+    width: 28px;
+    height: 28px;
+  }
 }
+
 
 /* 375 width tuning */
 @media (max-width:375px){
   .app-shell { padding: 10px; }
   .dashboard-grid { gap: 12px; }
+  
+  .topbar {
+    padding: 10px;
+    gap: 10px;
+    min-height: 56px;
+  }
+  
+  .search-input {
+    height: 36px;
+    font-size: 13px;
+    padding: 0 14px 0 40px;
+  }
+  
+  .search-icon {
+    left: 14px;
+    width: 16px;
+    height: 16px;
+  }
+  
+  .page-title {
+    font-size: 16px;
+  }
+  
+  .user-greeting {
+    display: none;
+  }
+  
+  .user-avatar {
+    width: 24px;
+    height: 24px;
+  }
 }
+
 
 /* 320 width tuning */
 @media (max-width:320px){
   .topbar { padding: 8px 10px; }
   .hamburger { width:38px; height:38px; }
   .chip { padding-inline:10px; font-size:12px; }
+  
+  .topbar {
+    padding: 8px;
+    gap: 8px;
+    min-height: 52px;
+  }
+  
+  .search-input {
+    height: 32px;
+    font-size: 12px;
+    padding: 0 12px 0 36px;
+  }
+  
+  .search-icon {
+    left: 12px;
+    width: 14px;
+    height: 14px;
+  }
+  
+  .page-title {
+    font-size: 14px;
+  }
+  
+  .user-avatar {
+    width: 20px;
+    height: 20px;
+  }
+  
+  .hamburger {
+    width: 36px;
+    height: 36px;
+  }
+  
+  .hamburger span {
+    left: 8px;
+    right: 8px;
+  }
 }
