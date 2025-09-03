@@ -726,9 +726,3 @@ h1, h2, h3, p, .chip, .btn { overflow-wrap:anywhere; }
   .hamburger { width:38px; height:38px; }
   .chip { padding-inline:10px; font-size:12px; }
 }
-
-/* Debug: any element wider than viewport draws red outline */
-@media (max-width:425px){
-  body * { outline: none; }
-  body ._debug-overflow { outline: 1px solid red !important; }
-}

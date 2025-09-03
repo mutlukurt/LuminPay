@@ -362,17 +362,3 @@ document.addEventListener('touchend', function (event) {
   }
   lastTouchEnd = now;
 }, false);
-
-// Debug: flag elements that cause horizontal overflow
-(function(){
-  const vw = () => Math.max(document.documentElement.clientWidth, window.innerWidth || 0);
-  function flagTooWide(){
-    document.querySelectorAll('body *').forEach(el=>{
-      if(el.scrollWidth > vw()+1) el.classList.add('_debug-overflow');
-      else el.classList.remove('_debug-overflow');
-    });
-  }
-  window.addEventListener('resize', flagTooWide);
-  window.addEventListener('load', flagTooWide);
-  setTimeout(flagTooWide, 0);
-})();
