@@ -419,14 +419,20 @@
   position: relative;
   height: 200px;
   margin-bottom: var(--space-lg);
+  width: 100%;
+  max-width: 100%;
+  box-sizing: border-box;
 }
 
 .credit-card {
   position: absolute;
   width: 100%;
+  max-width: 100%;
   height: 180px;
   border-radius: 22px;
   box-shadow: var(--shadow-1);
+  box-sizing: border-box;
+  overflow: hidden;
 }
 
 .card-back {
@@ -450,6 +456,8 @@
   z-index: 3;
   position: relative;
   overflow: hidden;
+  width: 100%;
+  max-width: 100%;
 }
 
 .card-gradient {

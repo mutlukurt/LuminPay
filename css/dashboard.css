@@ -83,6 +83,18 @@
   overflow: visible;
 }
 
+.my-card-section .card-stack {
+  width: 100%;
+  max-width: 100%;
+  box-sizing: border-box;
+}
+
+.my-card-section .credit-card {
+  width: 100%;
+  max-width: 100%;
+  box-sizing: border-box;
+}
+
 /* Transactions Section */
 .transactions-section {
   flex: 1;

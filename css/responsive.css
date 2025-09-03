@@ -557,6 +557,49 @@ body.no-scroll {
 html, body { overflow-x: hidden; }
 body.no-scroll { height: 100vh; overflow: hidden; }
 
+/* My Card Mobile Fixes */
+@media (max-width: 1023px) {
+  .card-stack {
+    width: 100%;
+    max-width: 100%;
+    padding-inline: 0;
+    transform: none !important;
+    margin-inline: 0;
+  }
+  
+  .credit-card {
+    width: 100%;
+    max-width: 100%;
+    box-sizing: border-box;
+    margin-inline: 0;
+  }
+  
+  .my-card-section {
+    width: 100%;
+    max-width: 100%;
+    overflow: hidden;
+  }
+}
+
+@media (max-width: 425px) {
+  .card-stack {
+    margin-inline: 0;
+    padding-inline: 0;
+  }
+  
+  .credit-card {
+    border-radius: 16px;
+    margin-inline: 0;
+  }
+  
+  .card-content {
+    padding: 16px;
+    width: 100%;
+    max-width: 100%;
+    box-sizing: border-box;
+  }
+}
+
 /* Hamburger button (hidden on desktop) */
 .hamburger {
   display: none; position: relative; width: 42px; height: 42px;
